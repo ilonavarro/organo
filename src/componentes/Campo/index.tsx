@@ -1,4 +1,13 @@
-import './campo.css'
+import './Campo.css'
+
+interface CampoProps {
+  type: string
+  label: string
+  placeholder: string
+  valor: string
+  aoAlterado: (valor: string) => void
+  obrigatorio: boolean
+}
 
 const Campo = ({
   type = 'text',
@@ -7,7 +16,7 @@ const Campo = ({
   valor,
   aoAlterado,
   obrigatorio = false
-}) => {
+}: CampoProps) => {
   return (
     <div className={type === 'text' ? 'campo' : 'campo campo-color'}>
       <label>{label}</label>
