@@ -1,25 +1,34 @@
 import { useState } from 'react'
+import { IColaborador } from '../../shared/interfaces/IColaborador'
+import { ITime } from '../../shared/interfaces/ITime'
 import Botao from '../Botao'
 import Campo from '../Campo'
 import ListaSuspensa from '../ListaSuspensa'
-import './formulario.css'
+import './Formulario.css'
 
-const Formulario = ({ aoCadastrar, times, cadastrarTime }) => {
+interface FormularioProps {
+  aoCadastrar: (colaborador: IColaborador) => void
+  times: string[]
+  cadastrarTime: (novoTime: ITime) => void
+}
+
+const Formulario = ({ aoCadastrar, times, cadastrarTime }: FormularioProps) => {
   const [nome, setNome] = useState('')
   const [cargo, setCargo] = useState('')
   const [imagem, setImagem] = useState('')
+  const [data, setData] = useState('')
   const [time, setTime] = useState('')
   const [nomeTime, setNomeTime] = useState('')
   const [corTime, setCorTime] = useState('#000000')
 
-  const aoSubmeter = evento => {
+  const aoSubmeter = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault()
-    // console.log('form enviado', nome, cargo, imagem, time)
     aoCadastrar({
       nome,
       cargo,
       imagem,
-      time
+      time,
+      data
     })
   }
 
@@ -45,6 +54,14 @@ const Formulario = ({ aoCadastrar, times, cadastrarTime }) => {
           label='Imagem'
           placeholder='Informe o endereço da imagem '
           aoAlterado={valor => setImagem(valor)}
+        />
+        <Campo
+          type='date'
+          obrigatorio={false}
+          label='Data de entrada no time'
+          placeholder=''
+          valor={data}
+          aoAlterado={valor => setData(valor)}
         />
         <ListaSuspensa
           obrigatorio={true}

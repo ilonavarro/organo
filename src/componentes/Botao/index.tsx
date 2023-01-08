@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import './Botao.css'
 
 interface BotaoProps {
-  texto: ReactElement
+  texto: ReactElement | string
 }
 
 const Botao = ({ texto }: BotaoProps) => {

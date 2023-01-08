@@ -16,7 +16,7 @@ const Colaborador = ({
   aoFavoritar
 }: ColaboradorProps) => {
   function favoritar() {
-    aoFavoritar(colaborador.id)
+    aoFavoritar(colaborador.id!)
   }
   const propsFavorito = {
     size: 25,
@@ -27,7 +27,7 @@ const Colaborador = ({
       <AiFillCloseCircle
         size={25}
         className='deletar'
-        onClick={() => aoDeletar(colaborador.id)}
+        onClick={() => aoDeletar(colaborador.id!)}
       />
       <div className='cabecalho' style={{ backgroundColor: corDeFundo }}>
         <img src={colaborador.imagem} alt={colaborador.nome} loading='lazy' />
@@ -35,6 +35,7 @@ const Colaborador = ({
       <div className='rodape'>
         <h4>{colaborador.nome}</h4>
         <h5>{colaborador.cargo}</h5>
+        {colaborador.data && <h5>{new Date(colaborador.data).toLocaleDateString()}</h5>}
         <div className='favoritar'>
           {colaborador.favorito ? (
             <AiFillHeart {...propsFavorito} color='#ff0000' />

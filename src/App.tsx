@@ -4,9 +4,11 @@ import Formulario from './componentes/Formulario'
 import Rodape from './componentes/Rodape'
 import Time from './componentes/Time'
 import { v4 as uuidv4 } from 'uuid'
+import { ITime } from './shared/interfaces/ITime'
+import { IColaborador } from './shared/interfaces/IColaborador'
 
 function App() {
-  const [times, setTimes] = useState([
+  const [times, setTimes] = useState<ITime[]>([
     {
       id: uuidv4(),
       nome: 'Programação',
@@ -257,13 +259,13 @@ function App() {
     }
   ]
 
-  const [colaboradores, setColaboradores] = useState(inicial)
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>(inicial)
 
-  function deletarColaborador(id) {
+  function deletarColaborador(id: string) {
     setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id))
   }
 
-  function mudarCorDoTime(cor, id) {
+  function mudarCorDoTime(cor: string, id: string) {
     setTimes(
       times.map(time => {
         if (time.id === id) {
@@ -274,11 +276,11 @@ function App() {
     )
   }
 
-  function cadastrarTime(novoTime) {
+  function cadastrarTime(novoTime: ITime) {
     setTimes([...times, { ...novoTime, id: uuidv4() }])
   }
 
-  function resolverFavorito(id) {
+  function resolverFavorito(id: string) {
     setColaboradores(
       colaboradores.map(colaborador => {
         if (colaborador.id === id) colaborador.favorito = !colaborador.favorito
